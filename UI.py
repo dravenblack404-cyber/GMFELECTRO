@@ -174,9 +174,9 @@ max_racks = st.sidebar.slider("Maximum Racks per Batch", min_value=1, max_value=
 RACK_CLEARANCE = st.sidebar.number_input("Clearance Between Racks (cm)", min_value=0, value=10, step=1)
 WALL_CLEARANCE = st.sidebar.number_input("Wall Clearance (cm)", min_value=0, value=10, step=1)
 PART_CLEARANCE = st.sidebar.number_input("Part Clearance (cm)", min_value=0, value=5, step=1)
-bath_length = st.sidebar.number_input("Tank Length (X) (cm)", min_value=10, value=100, step=10)
+bath_length = st.sidebar.number_input("Tank Length (X) (cm)", min_value=10, value=300, step=10)
 bath_height = st.sidebar.number_input("Tank Height (Y) (cm)", min_value=10, value=200, step=10)
-bath_width  = st.sidebar.number_input("Tank Width (Z) (cm)", min_value=10, value=300, step=10)
+bath_width  = st.sidebar.number_input("Tank Width (Z) (cm)", min_value=10, value=100, step=10)
 electroplating_bath_dims = {'name': 'Electroplating-Bath', 'width': bath_width, 'height': bath_height, 'length': bath_length}
 
 st.sidebar.markdown("---")
@@ -386,6 +386,7 @@ if st.button("🚀 Find Optimal Packing", type="primary"):
                         })
 
                     st.dataframe(details_data, use_container_width=True)
+
 
 
 
