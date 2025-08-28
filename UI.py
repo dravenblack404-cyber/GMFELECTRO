@@ -4,15 +4,19 @@ from ortools.sat.python import cp_model
 import plotly.graph_objects as go
 import time
 
-# --- Konfigurasi Halaman & Gaya Tampilan ---
-st.set_page_config(page_title="GMF Electroplating Optimizer", layout="wide", page_icon="✈️")
+# Style
+st.set_page_config(
+    page_title="GMF Electroplating Optimizer", 
+    layout="wide", 
+    page_icon="assets/icon.png"
+)
 
-# Fungsi untuk injeksi CSS
+# CSS Inject
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Injeksi CSS Kustom dengan st.markdown
+# CSS code
 st.markdown("""
 <style>
     /* Warna utama */
@@ -102,9 +106,7 @@ st.markdown("""
 # PARAMETER
 PackedItem = namedtuple('PackedItem', ['name', 'position', 'dimension'])
 
-# --- UI Bagian Utama ---
-
-# Header Kustom
+# Header
 st.markdown("""
 <div class="custom-header">
     <h1>📦 GMF Electroplating Tank Optimizer</h1>
@@ -135,7 +137,7 @@ except:
     st.sidebar.error("Invalid ratio format. Use format like '1:5'.")
     st.stop()
 
-# Dibalik karena rasio Anoda:Katoda
+# Anode : Cathode
 max_cathode_area = anode_area_cm2 / min_ratio_val
 min_cathode_area = anode_area_cm2 / max_ratio_val
 
@@ -276,7 +278,7 @@ def find_optimal_layout_for_one_bath(parts_available, bath, num_racks, min_area,
             remaining_parts_result.append(parts_available[p])
     return packed_racks_result, remaining_parts_result
 
-# --- Tombol Aksi & Pemrosesan ---
+# Button
 if st.button("🚀 Find Optimal Packing", type="primary"):
     all_parts = []
     for part_type in part_definitions:
@@ -359,3 +361,4 @@ if st.button("🚀 Find Optimal Packing", type="primary"):
                         })
 
                     st.dataframe(details_data, use_container_width=True)
+
