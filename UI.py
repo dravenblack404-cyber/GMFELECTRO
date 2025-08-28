@@ -17,62 +17,90 @@ def local_css(file_name):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # CSS code
+# Gantikan seluruh blok st.markdown("""<style>...""") kamu dengan yang ini:
 st.markdown("""
 <style>
-    /* Warna utama */
+    /* ================================================================================
+    TEMA DASAR (LIGHT THEME)
+    ================================================================================
+    */
+
     :root {
-        --primary-color-dark: #0062E6; /* Biru sedikit lebih gelap untuk gradien */
-        --primary-color-light: #007FFF; /* Azure Blue asli */
-        --background-color-start: #F0F2F6; /* Abu-abu terang */
-        --background-color-end: #FFFFFF;   /* Putih */
-        --text-color: #31333F;
+        --primary-color-dark: #0062E6;
+        --primary-color-light: #007FFF;
         --light-text-color: #FFFFFF;
+        
+        /* BARU: Variabel warna yang bisa beradaptasi */
+        --app-bg-start: #F0F2F6;
+        --app-bg-end: #FFFFFF;
+        --header-bg-start: #E9ECEF;
+        --header-bg-end: #F8F9FA;
+        --header-text-primary: #31333F;
+        --header-text-secondary: #6c757d;
+        --sidebar-bg: #F0F2F6;
+        --card-bg: rgba(255, 255, 255, 0.8);
         --border-color: #E6E6E6;
     }
 
-    /* Latar belakang utama dengan gradien abu-abu ke putih */
+    /* ================================================================================
+    TEMA GELAP (DARK THEME) - Didefinisikan di dalam media query
+    ================================================================================
+    */
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            /* BARU: Ganti nilai variabel untuk dark mode */
+            --app-bg-start: #0F1116; /* Abu-abu sangat gelap */
+            --app-bg-end: #181A20;   /* Sedikit lebih terang */
+            --header-bg-start: #2A2C34;
+            --header-bg-end: #22242A;
+            --header-text-primary: #FFFFFF; /* Teks jadi putih */
+            --header-text-secondary: #A0A0A0; /* Abu-abu terang untuk subjudul */
+            --sidebar-bg: #1A1C22;
+            --card-bg: rgba(42, 44, 52, 0.8); /* Warna kartu jadi gelap transparan */
+            --border-color: #3E3F42; /* Border juga jadi lebih gelap */
+        }
+    }
+
+    /* ================================================================================
+    ATURAN GAYA (Tidak perlu diubah, karena sudah menggunakan variabel)
+    ================================================================================
+    */
+
     .stApp {
-        background: linear-gradient(to bottom, var(--background-color-start) 0%, var(--background-color-end) 30%);
+        background: linear-gradient(to bottom, var(--app-bg-start) 0%, var(--app-bg-end) 30%);
     }
     
-    /* Header Kustom dengan GRADASI BIRU */
     .custom-header {
-    /* GRADASI BARU: Abu-abu dari terang ke lebih terang */
-    background: linear-gradient(135deg, #E9ECEF 0%, #F8F9FA 100%);
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    /* WARNA TEKS BARU: Gelap agar kontras */
-    color: var(--text-color);
-    text-align: center;
-    border: 1px solid var(--border-color); /* Tambah border halus untuk definisi */
-    /* SHADOW BARU: Netral (hitam transparan) */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-}
-.custom-header h1 {
-    /* WARNA TEKS BARU */
-    color: var(--text-color);
-    font-size: 2.5em;
-    margin-bottom: 0.2em;
-}
-.custom-header p {
-    /* WARNA TEKS BARU */
-    color: #6c757d; /* Abu-abu sekunder untuk subjudul */
-    font-size: 1.1em;
-}
+        background: linear-gradient(135deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        color: var(--header-text-primary);
+        text-align: center;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    }
+    .custom-header h1 {
+        color: var(--header-text-primary);
+        font-size: 2.5em;
+        margin-bottom: 0.2em;
+    }
+    .custom-header p {
+        color: var(--header-text-secondary);
+        font-size: 1.1em;
+    }
     
-    /* Sidebar tetap solid untuk kontras */
     [data-testid="stSidebar"] {
-        background-color: var(--background-color-start);
+        background-color: var(--sidebar-bg);
         border-right: 1px solid var(--border-color);
     }
     [data-testid="stSidebar"] h2 {
         color: var(--primary-color-dark);
     }
     
-    /* Tombol Utama dengan GRADASI BIRU */
     .stButton>button {
-        border: none; /* Hapus border, gradien sudah cukup */
+        border: none;
         border-radius: 10px;
         color: var(--light-text-color);
         background: linear-gradient(135deg, var(--primary-color-dark) 0%, var(--primary-color-light) 100%);
@@ -81,25 +109,22 @@ st.markdown("""
         transition: all 0.3s ease;
         box-shadow: 0 4px 10px rgba(0, 127, 255, 0.2);
     }
-    /* Efek Hover dengan gradasi terbalik dan sedikit terangkat */
     .stButton>button:hover {
         background: linear-gradient(135deg, var(--primary-color-light) 0%, var(--primary-color-dark) 100%);
         box-shadow: 0 6px 20px rgba(0, 127, 255, 0.3);
-        transform: translateY(-2px); /* Efek tombol terangkat */
+        transform: translateY(-2px);
     }
 
-    /* Expander di sidebar */
     .st-emotion-cache-134p638 {
         border: 1px solid var(--border-color);
         border-radius: 8px;
     }
     
-    /* Kartu Hasil (dibuat sedikit transparan agar gradien background terlihat) */
+    /* DIUBAH: Menggunakan variabel --card-bg */
     .st-emotion-cache-1fplaw { /* Selector untuk st.container(border=True) */
-        background-color: rgba(255, 255, 255, 0.8); /* Putih dengan sedikit transparansi */
-        backdrop-filter: blur(5px); /* Efek "frosted glass" */
+        background-color: var(--card-bg);
+        backdrop-filter: blur(5px);
     }
-    
 </style>
 """, unsafe_allow_html=True)
 
@@ -361,4 +386,5 @@ if st.button("🚀 Find Optimal Packing", type="primary"):
                         })
 
                     st.dataframe(details_data, use_container_width=True)
+
 
