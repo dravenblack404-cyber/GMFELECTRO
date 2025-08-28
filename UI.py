@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import time
 
 # --- Konfigurasi Halaman & Gaya Tampilan ---
-st.set_page_config(page_title="GMF Electroplating Optimizer", layout="wide", page_icon="📦")
+st.set_page_config(page_title="GMF Electroplating Optimizer", layout="wide", page_icon="✈️")
 
 # Fungsi untuk injeksi CSS
 def local_css(file_name):
@@ -357,4 +357,5 @@ if st.button("🚀 Find Optimal Packing", type="primary"):
                             "Position (X, Y, Z)": f"({item.position[0]}, {item.position[1]}, {item.position[2]})",
                             "Dimensions (L, H, W)": f"{item.dimension[0]} x {item.dimension[1]} x {item.dimension[2]}"
                         })
+
                     st.dataframe(details_data, use_container_width=True)
